@@ -1,6 +1,8 @@
 import "./App.css";
+import Alert from "./Alert";
+import Button from "./components/Button";
 import { useState } from "react";
-import ExpandableText from "./ExpandableText";
+import Like from "./Like";
 
 function App() {
   const [game, setGame] = useState({
@@ -14,14 +16,18 @@ function App() {
 
   return (
     <div>
-      <button onClick={handleClick}>Change the name to BOB</button>
-      <p>{game.player.name}</p>
-      <ExpandableText maxChars={10}>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni
-        provident, pariatur tempore commodi velit aliquam explicabo laborum
-        exercitationem excepturi officiis, sint, eaque minus molestias
-        perferendis ut eum hic dolor! Unde.
-      </ExpandableText>
+      <Message items={names} heading="Names" onSelectItem={handleSelectItem} />
+      <Button onButtonClick={handleButtonClick}>Click me</Button>
+      {buttonClicked ? (
+        <Alert closeButton={handleButtonClick}>
+          Some <b>Alert</b>
+        </Alert>
+      ) : (
+        <></>
+      )}
+      <div className="likeButton">
+        <Like />
+      </div>
     </div>
   );
 }
