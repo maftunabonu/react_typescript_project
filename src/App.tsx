@@ -1,8 +1,9 @@
 import Message from "./Message";
 import "./App.css";
 import Alert from "./Alert";
-import Button from "./Button";
+import Button from "./components/Button";
 import { useState } from "react";
+import Like from "./Like";
 
 function App() {
   const handleSelectItem = (item: string) => {
@@ -27,6 +28,9 @@ function App() {
       ) : (
         <></>
       )}
+      <div className="likeButton">
+        <Like />
+      </div>
     </div>
   );
 }
