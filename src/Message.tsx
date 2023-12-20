@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ListGroups from "./components/ListGroups";
 
 interface Props {
   items: string[];
@@ -29,6 +30,7 @@ function Message({ items, heading, onSelectItem }: Props) {
           </li>
         ))}
       </ul>
+      <ListGroups />
     </div>
   );
 }
