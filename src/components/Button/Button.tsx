@@ -1,3 +1,5 @@
+import styles from "./Button.module.css";
+
 interface Props {
   children: string;
   onButtonClick: () => void;
@@ -5,7 +7,7 @@ interface Props {
 const Button = ({ children, onButtonClick }: Props) => {
   return (
     <>
-      <button onClick={onButtonClick} className="btn btn-primary">
+      <button onClick={onButtonClick} className={styles.buttonStyle}>
         {children}
       </button>
     </>

@@ -1,32 +1,27 @@
-import Message from "./Message";
 import "./App.css";
-import Alert from "./Alert";
-import Button from "./Button";
 import { useState } from "react";
+import ExpandableText from "./ExpandableText";
 
 function App() {
-  const handleSelectItem = (item: string) => {
-    console.log(item);
+  const [game, setGame] = useState({
+    id: 1,
+    player: { name: "John" },
+  });
+
+  const handleClick = () => {
+    setGame({ ...game, player: { name: "Bob" } });
   };
 
-  const handleButtonClick = () => {
-    setButtonClicked(!buttonClicked);
-  };
-
-  const [buttonClicked, setButtonClicked] = useState(false);
-
-  const names = ["Maria", "Aisha", "Leyla", "Bonu"];
   return (
     <div>
-      <Message items={names} heading="Names" onSelectItem={handleSelectItem} />
-      <Button onButtonClick={handleButtonClick}>Click me</Button>
-      {buttonClicked ? (
-        <Alert closeButton={handleButtonClick}>
-          Some <b>Alert</b>
-        </Alert>
-      ) : (
-        <></>
-      )}
+      <button onClick={handleClick}>Change the name to BOB</button>
+      <p>{game.player.name}</p>
+      <ExpandableText maxChars={10}>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni
+        provident, pariatur tempore commodi velit aliquam explicabo laborum
+        exercitationem excepturi officiis, sint, eaque minus molestias
+        perferendis ut eum hic dolor! Unde.
+      </ExpandableText>
     </div>
   );
 }
