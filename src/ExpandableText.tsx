@@ -19,13 +19,15 @@ const ExpandableText = ({ maxChars, children }: Props) => {
     setText(children);
   };
   return (
-    <div style={{ display: "flex", flexDirection: "row" }}>
-      <p>{text}</p>
-      {expanded ? (
-        <button onClick={handleRestrict}>Less</button>
-      ) : (
-        <button onClick={handleExpand}>More</button>
-      )}
+    <div>
+      <p>
+        {text}
+        {expanded ? (
+          <button onClick={handleRestrict}>Less</button>
+        ) : (
+          <button onClick={handleExpand}>More</button>
+        )}
+      </p>
     </div>
   );
 };
