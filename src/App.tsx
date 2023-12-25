@@ -1,27 +1,50 @@
+import { useEffect, useState } from "react";
 import "./App.css";
-import { useState } from "react";
-import ExpandableText from "./ExpandableText";
+import Expense from "./expense-tracker/components/Expense";
+import ExpenseFilter from "./expense-tracker/components/ExpenseFilter";
+import ExpenseForm from "./expense-tracker/components/ExpenseForm";
 
 function App() {
-  const [game, setGame] = useState({
-    id: 1,
-    player: { name: "John" },
-  });
+  const [category, setCategory] = useState("");
+  const [expenses, setExpenses] = useState([
+    { id: "1", description: "Nike air", amount: 3, category: "Utilities" },
+    { id: "2", description: "Nike woman", amount: 4, category: "Groceries" },
+    { id: "3", description: "Zara coat", amount: 3, category: "Utilities" },
+    { id: "4", description: "Hoodie", amount: 4, category: "Entertainment" },
+  ]);
 
-  const handleClick = () => {
-    setGame({ ...game, player: { name: "Bob" } });
+  const visibleExpenses = category
+    ? expenses.filter((expense) => expense.category === category)
+    : expenses;
+
+  const onDelete = (id: string) => {
+    setExpenses(expenses.filter((expense) => expense.id !== id));
   };
+  useEffect(() => {
+    console.log(expenses);
+  }, []);
 
   return (
     <div>
-      <button onClick={handleClick}>Change the name to BOB</button>
-      <p>{game.player.name}</p>
-      <ExpandableText maxChars={10}>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni
-        provident, pariatur tempore commodi velit aliquam explicabo laborum
-        exercitationem excepturi officiis, sint, eaque minus molestias
-        perferendis ut eum hic dolor! Unde.
-      </ExpandableText>
+      <div className="mb-5">
+        <ExpenseForm
+          onSubmit={(newExpense) =>
+            setExpenses([
+              ...expenses,
+              {
+                ...newExpense,
+                id:
+                  Date.now().toString(36) +
+                  Math.random().toString(36).substring(2),
+              },
+            ])
+          }
+        />
+      </div>
+      <div className="mb-3">
+        <ExpenseFilter onSelect={(category) => setCategory(category)} />
+      </div>
+      <Expense expenses={visibleExpenses} onDelete={onDelete} />
     </div>
   );
 }
